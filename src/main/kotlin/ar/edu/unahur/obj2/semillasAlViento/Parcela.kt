@@ -7,7 +7,7 @@ class Parcela(val ancho: Int, val largo: Int, val horasSolPorDia: Int) {
 
   fun superficie() = ancho * largo
 
-  // Pregunta! No hay un tema de Abstracción por no rehusar el método superficie?
+  // Abstracción: deberia utilizar la funcion creada paa tal fin de superficie()
   // y la expresión seria -> return if(ancho > largo) this.superficie()/5 else this.superficie()/3 + largo
   fun cantidadMaximaPlantas() =
     if (ancho > largo) ancho * largo / 5 else ancho * largo / 3 + largo
@@ -18,7 +18,7 @@ class Parcela(val ancho: Int, val largo: Int, val horasSolPorDia: Int) {
   // faltaría un método(subtarea) plantasDeLaParcela() que retorne el nro de actual de plantados en la parcela.
   // ROBUSTEZ ->
   // método plantar(). chequear si no hay complicaciones  -> si no hay  ->  plantar   si hay (lanzar error)
-
+  // Sencillez: Al no ser necesario el atributo cantidadPlantas, puede utilizarse en su lugar plantas.size en la siguiente funcion
   fun plantar(planta: Planta) {
     if (cantidadPlantas == this.cantidadMaximaPlantas()) {
       println("Ya no hay lugar en esta parcela")
@@ -45,7 +45,7 @@ class Agricultora(val parcelas: MutableList<Parcela>) {
     }
   }
 
-  // si todas las plantas dan semillas
+  // Simplicidad: Genera una coleccion de parcelas que cumplen con una condicion de manera clara.
   fun parcelasSemilleras() =
     parcelas.filter { parcela -> parcela.plantas.all { planta -> planta.daSemillas() }   }
 
