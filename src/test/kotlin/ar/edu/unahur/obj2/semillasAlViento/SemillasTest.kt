@@ -77,7 +77,7 @@ class ParcelaTest : DescribeSpec({
         it("Conociendo superficie") {
             unaParcela.superficie().shouldBe(20)
         }
-        it("Cantidad Maxima Plantas de ll parcela ") {
+        it("Cantidad Maxima Plantas de la parcela ") {
             unaParcela.cantidadMaximaPlantas().shouldBe(4)
         }
         //El metodo esta en Planta, no en parcela por eso no funciona. DESCOMENTAR CUANDO SE PASA EL METODO A PARCELA
@@ -94,29 +94,33 @@ class ParcelaTest : DescribeSpec({
     }
 
 })
-
-
-
-/*
+/**/
 class AgricultoraTest : DescribeSpec({
-
     val unaDeSoja1 = Soja(2010,2.0f,true)
     val unaParcela1 = Parcela(20,1,9)
     val unaParcela2 = Parcela(20,1,9)
-    val parcelas: MutableList(unaParcela,unaParcela2)
 
-    val unaAgricultora = Agricultora(parcelas)
-    unaAgricultora.parcelas.add(unaParcela1)
+    val parcelaAgricultora = mutableListOf<Parcela>(unaParcela1,unaParcela2)
+    val unaAgricultora = Agricultora(parcelaAgricultora)
+    unaParcela1.plantas.add(unaDeSoja1)
+    unaParcela1.plantas.add(unaDeSoja1)
+    unaParcela1.plantas.add(unaDeSoja1)
+    unaAgricultora.plantarEstrategicamente(unaDeSoja1)
+
 
     describe("Pidiendo info de Agricultora"){
-        it("Conociendo parcelasSemilleras") {
-            unaAgricultora.parcelasSemilleras().size.shouldBe(1)
-        }
 
+        //es semillera si todas sus plantas dan semillas
+        // NO FUNCIONA PORQUE RETORNA UNA LISTA Y NO UN BOOLEAN
+        it("unaAgricultora es una parcela semillera") {
+            unaAgricultora.parcelasSemilleras().shouldBe(false)
+        }
+        // buscar la parcela que más lugar tenga y agregar allí la planta
+        // NO FUNCIONA PORQUE RECIBE LA LISTA DE PARCELA POR PARAMETRO
         it(" plantar estratégicamente") {
             unaAgricultora.plantarEstrategicamente(unaDeSoja1)
+            unaParcela2.cantidadPlantas.shouldBe(1)
         }
     }
 
 })
-*/
