@@ -60,7 +60,6 @@ class PlantaTest : DescribeSpec({
             unaDeSojaTranj.horasDeSolQueTolera().shouldBe(18)
         }
     }
-
 })
 
 class ParcelaTest : DescribeSpec({
@@ -91,13 +90,11 @@ class ParcelaTest : DescribeSpec({
         it("Saber si la parcela tiene complicaciones(any plant tolera menos sol que la parcela") {
            unaParcela.parcelaTieneComplicaciones().shouldBe(false)
         }
-
         fun Any.shouldThrow() { "No hay lugar en la parcela o la planta no tolera el sol"}
         it("parcela Puede plantar unaDeMentita"){
             unaParcela.plantar(unaDeMentita).shouldThrow()
         }
     }
-
 })
 
 class AgricultoraTest : DescribeSpec({
@@ -114,21 +111,16 @@ class AgricultoraTest : DescribeSpec({
     unaParcela1.plantar(unaDeSoja1)
     unaParcela2.plantar(unaDeMentita)
 
-    //unaAgricultora.plantarEstrategicamente(unaDeSoja1)
-
-
     describe("Pidiendo info de Agricultora"){
-
         it("Si unaAgricultora es semillera. unaParcela1=soja y unaParcela2=mentita. Falso") {
             unaAgricultora.esSemillera().shouldBe(false)
         }
         it("La parcela elegida es (la que tiene menos plantas)"){
             unaAgricultora.parcelaElegida().shouldBe(unaParcela2)
         }
-        // buscar la parcela que más lugar tenga y agregar allí la planta
-        // NO FUNCIONA PORQUE RECIBE LA LISTA DE PARCELA POR PARAMETRO
-        it(" plantar estratégicamente") {
-            unaParcela2.cantidadPlantada().shouldBe(1)
+
+        it("Agricultora plantar estratégicamente") {
+            unaAgricultora.plantarEstrategicamente(unaDeMentita).shouldBe(unaParcela2)
         }
     }
 

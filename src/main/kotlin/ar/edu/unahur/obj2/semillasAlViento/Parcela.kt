@@ -16,7 +16,7 @@ class Parcela(val ancho: Int, val largo: Int, val horasSolPorDia: Int) {
     if (!quedaLugarEnParcela() && !plantaToleraElSolDeLaParcela(planta)) {
       error("No hay lugar en la parcela o la planta no tolera el sol")
     }
-    else{ plantas.add(planta) }
+    else { plantas.add(planta) }
   }
 
 }
