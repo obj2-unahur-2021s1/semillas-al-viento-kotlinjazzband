@@ -3,10 +3,7 @@ package ar.edu.unahur.obj2.semillasAlViento
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.booleans.shouldBeFalse
-import io.kotest.matchers.collections.shouldContainExactly
-import io.kotest.matchers.comparables.shouldBeLessThan
 import io.kotest.matchers.shouldBe
-import io.kotest.matchers.types.shouldBeTypeOf
 
 class PlantaTest : DescribeSpec({
 
@@ -68,13 +65,13 @@ class PlantaTest : DescribeSpec({
 
 class ParcelaTest : DescribeSpec({
     val unaParcela = Parcela(20,1,9)
+
     val unaDeSoja1 = Soja(2010,1.7f)
     val unaDeSoja2 = Soja(2010,1.8f)
     val unaDeSoja3 = Soja(2010,2.1f)
     val unaDeSoja4 = Soja(2010,1.5f)
     val unaDeMentita = Menta(2015,0.1f)
 
-    /**/
     unaParcela.plantar(unaDeSoja1)
     unaParcela.plantar(unaDeSoja2)
     unaParcela.plantar(unaDeSoja3)
@@ -91,10 +88,10 @@ class ParcelaTest : DescribeSpec({
             unaParcela.cantidadPlantada().shouldBe(4)
         }
         //El metodo esta en Planta, no en parcela por eso no funciona. DESCOMENTAR CUANDO SE PASA EL METODO A PARCELA
-        it("Saber si la parcela tiene complicaciones(alguna planta tolera menos sol que la parcela") {
+        it("Saber si la parcela tiene complicaciones(any plant tolera menos sol que la parcela") {
            unaParcela.parcelaTieneComplicaciones().shouldBe(false)
         }
-        /**/
+
         fun Any.shouldThrow() { "No hay lugar en la parcela o la planta no tolera el sol"}
         it("parcela Puede plantar unaDeMentita"){
             unaParcela.plantar(unaDeMentita).shouldThrow()
@@ -103,31 +100,34 @@ class ParcelaTest : DescribeSpec({
 
 })
 
-
-
 class AgricultoraTest : DescribeSpec({
     val unaDeSoja1 = Soja(2010,2.0f)
     val unaParcela1 = Parcela(20,1,9)
     val unaParcela2 = Parcela(20,1,9)
 
     val unaAgricultora = Agricultora()
-    unaParcela1.plantas.add(unaDeSoja1)
-    unaParcela1.plantas.add(unaDeSoja1)
-    unaParcela1.plantas.add(unaDeSoja1)
-    unaAgricultora.plantarEstrategicamente(unaDeSoja1)
+    val unaDeMentita = Menta(2015,0.1f)
+    unaAgricultora.agregaraParcela(unaParcela1)
+    unaAgricultora.agregaraParcela(unaParcela2)
+    unaParcela1.plantar(unaDeSoja1)
+    unaParcela1.plantar(unaDeSoja1)
+    unaParcela1.plantar(unaDeSoja1)
+    unaParcela2.plantar(unaDeMentita)
+
+    //unaAgricultora.plantarEstrategicamente(unaDeSoja1)
 
 
     describe("Pidiendo info de Agricultora"){
 
-        //es semillera si todas sus plantas dan semillas
-        // NO FUNCIONA PORQUE RETORNA UNA LISTA Y NO UN BOOLEAN
-        it("unaAgricultora es una parcela semillera") {
-            unaAgricultora.parcelasSemilleras().shouldBe(false)
+        it("Si unaAgricultora es semillera. unaParcela1=soja y unaParcela2=mentita. Falso") {
+            unaAgricultora.esSemillera().shouldBe(false)
+        }
+        it("La parcela elegida es (la que tiene menos plantas)"){
+            unaAgricultora.parcelaElegida().shouldBe(unaParcela2)
         }
         // buscar la parcela que más lugar tenga y agregar allí la planta
         // NO FUNCIONA PORQUE RECIBE LA LISTA DE PARCELA POR PARAMETRO
         it(" plantar estratégicamente") {
-            unaAgricultora.plantarEstrategicamente(unaDeSoja1)
             unaParcela2.cantidadPlantada().shouldBe(1)
         }
     }
