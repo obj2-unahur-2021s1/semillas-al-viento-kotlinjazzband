@@ -59,7 +59,7 @@ class PlantaTest : DescribeSpec({
         it("Soja Trangenica da semillas"){
             unaDeSojaTranj.daSemillas().shouldBeFalse()
         }
-        it("sSoja trangenica horas de sol que tolera"){
+        it("Soja trangenica horas de sol que tolera"){
             unaDeSojaTranj.horasDeSolQueTolera().shouldBe(18)
         }
     }
@@ -74,41 +74,43 @@ class ParcelaTest : DescribeSpec({
     val unaDeSoja4 = Soja(2010,1.5f)
     val unaDeMentita = Menta(2015,0.1f)
 
+    /**/
     unaParcela.plantar(unaDeSoja1)
-    unaParcela.plantas.add(unaDeSoja2)
-    unaParcela.plantas.add(unaDeSoja3)
-    unaParcela.plantas.add(unaDeSoja4)
+    unaParcela.plantar(unaDeSoja2)
+    unaParcela.plantar(unaDeSoja3)
+    unaParcela.plantar(unaDeSoja4)
 
-
-    describe("Chequeando requerimientos de una Parcela"){
-        it("Conociendo superficie") {
+    describe("Chequeando requerimientos de la Parcela"){
+        it("Superficie de la Parcela") {
             unaParcela.superficie().shouldBe(20)
         }
         it("Cantidad Maxima Plantas de la parcela ") {
-            unaParcela.cantidadMaximaPlantas().shouldBe(4)
+            unaParcela.cantidadMaximaDePlantas().shouldBe(4)
+        }
+        it("Cantidad plantada en una parcela"){
+            unaParcela.cantidadPlantada().shouldBe(4)
         }
         //El metodo esta en Planta, no en parcela por eso no funciona. DESCOMENTAR CUANDO SE PASA EL METODO A PARCELA
         it("Saber si la parcela tiene complicaciones(alguna planta tolera menos sol que la parcela") {
-           //unaParcela.parcelaTieneComplicaciones().shouldBe(false)
+           unaParcela.parcelaTieneComplicaciones().shouldBe(false)
         }
-        fun Any.shouldThrow() { "No se puede plantar esto acá, se va a quemar o Ya no hay lugar en esta parcela"}
-        it("parcela Puede plantar una val unaDeMentita"){
+        /**/
+        fun Any.shouldThrow() { "No hay lugar en la parcela o la planta no tolera el sol"}
+        it("parcela Puede plantar unaDeMentita"){
             unaParcela.plantar(unaDeMentita).shouldThrow()
-        }
-        it("una parcela puede plantar por cantidad"){
-            unaParcela.plantar(unaDeSoja3).shouldThrow()
         }
     }
 
 })
-/**/
+
+
+
 class AgricultoraTest : DescribeSpec({
     val unaDeSoja1 = Soja(2010,2.0f)
     val unaParcela1 = Parcela(20,1,9)
     val unaParcela2 = Parcela(20,1,9)
 
-    val parcelaAgricultora = mutableListOf<Parcela>(unaParcela1,unaParcela2)
-    val unaAgricultora = Agricultora(parcelaAgricultora)
+    val unaAgricultora = Agricultora()
     unaParcela1.plantas.add(unaDeSoja1)
     unaParcela1.plantas.add(unaDeSoja1)
     unaParcela1.plantas.add(unaDeSoja1)
@@ -126,7 +128,7 @@ class AgricultoraTest : DescribeSpec({
         // NO FUNCIONA PORQUE RECIBE LA LISTA DE PARCELA POR PARAMETRO
         it(" plantar estratégicamente") {
             unaAgricultora.plantarEstrategicamente(unaDeSoja1)
-            unaParcela2.cantidadPlantas.shouldBe(1)
+            unaParcela2.cantidadPlantada().shouldBe(1)
         }
     }
 

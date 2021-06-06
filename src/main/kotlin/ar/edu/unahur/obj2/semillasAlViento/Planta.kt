@@ -12,7 +12,6 @@ class Menta( anioObtencionSemilla: Int, altura: Float) : Planta(anioObtencionSem
 }
 
 open class Soja( anioObtencionSemilla: Int, altura: Float) : Planta(anioObtencionSemilla, altura) {
-
   override fun daSemillas(): Boolean = esFuerte() || (this.anioObtencionSemilla > 2007 && this.altura > 1)
   override fun horasDeSolQueTolera(): Int {
     var horas: Int = 0
