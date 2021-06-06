@@ -13,9 +13,10 @@ class PlantaTest : DescribeSpec({
     val unaDeMenta = Menta(2005,0.5f)
     val unaDeMentita = Menta(2015,0.1f)
 
-    val unaDeSoja = Soja(2010,0.4f,false)
-    val unaDeSojaM = Soja(2010,0.9f,false)
-    val unaDeSojaA = Soja(2010,1.5f,false)
+    val unaDeSoja = Soja(2010,0.4f)
+    val unaDeSojaM = Soja(2010,0.9f)
+    val unaDeSojaA = Soja(2010,1.5f)
+    val unaDeSojaTranj = SojaTrangenica(2015, 1.2f)
 
     describe("Chequeando cosas de planta menta"){
         it("de Menta horas De Sol Que Tolera") {
@@ -26,7 +27,7 @@ class PlantaTest : DescribeSpec({
         }
         // la condición debe ser and no or para que funcione si vale la condicion adicional
         it("Planta de Mentita da Semillas") {
-            //unaDeMenta.daSemillas().shouldBeFalse()
+            unaDeMentita.daSemillas().shouldBeFalse()
         }
         it("de Menta es Fuerte") {
             unaDeMenta.esFuerte().shouldBeFalse()
@@ -55,16 +56,22 @@ class PlantaTest : DescribeSpec({
         it("Planta unaDeSoja esFuerte") {
             unaDeSoja.esFuerte().shouldBeFalse()
         }
+        it("Soja Trangenica da semillas"){
+            unaDeSojaTranj.daSemillas().shouldBeFalse()
+        }
+        it("sSoja trangenica horas de sol que tolera"){
+            unaDeSojaTranj.horasDeSolQueTolera().shouldBe(18)
+        }
     }
 
 })
 
 class ParcelaTest : DescribeSpec({
     val unaParcela = Parcela(20,1,9)
-    val unaDeSoja1 = Soja(2010,1.7f,true)
-    val unaDeSoja2 = Soja(2010,1.8f,true)
-    val unaDeSoja3 = Soja(2010,2.1f,true)
-    val unaDeSoja4 = Soja(2010,1.5f,true)
+    val unaDeSoja1 = Soja(2010,1.7f)
+    val unaDeSoja2 = Soja(2010,1.8f)
+    val unaDeSoja3 = Soja(2010,2.1f)
+    val unaDeSoja4 = Soja(2010,1.5f)
     val unaDeMentita = Menta(2015,0.1f)
 
     unaParcela.plantar(unaDeSoja1)
@@ -96,7 +103,7 @@ class ParcelaTest : DescribeSpec({
 })
 /**/
 class AgricultoraTest : DescribeSpec({
-    val unaDeSoja1 = Soja(2010,2.0f,true)
+    val unaDeSoja1 = Soja(2010,2.0f)
     val unaParcela1 = Parcela(20,1,9)
     val unaParcela2 = Parcela(20,1,9)
 
