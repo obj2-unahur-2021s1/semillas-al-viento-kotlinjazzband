@@ -1,7 +1,5 @@
 package ar.edu.unahur.obj2.semillasAlViento
 
-// fun parcelaElegida() = parcelas.maxByOrNull { it.cantidadQuePuedoPlantar() }
-// fun plantarEstrategicamente(planta: Planta){ this.parcelaElegida()?.plantar(planta) }
 class Agricultora() {
     val parcelas = mutableListOf<Parcela>()
 

@@ -3,6 +3,7 @@ package ar.edu.unahur.obj2.semillasAlViento
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.booleans.shouldBeFalse
+import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.shouldBe
 
 class PlantaTest : DescribeSpec({
@@ -110,6 +111,7 @@ class AgricultoraTest : DescribeSpec({
     unaParcela1.plantar(unaDeSoja1)
     unaParcela1.plantar(unaDeSoja1)
     unaParcela2.plantar(unaDeMentita)
+    unaAgricultora.plantarEstrategicamente(unaDeMentita)
 
     describe("Pidiendo info de Agricultora"){
         it("Si unaAgricultora es semillera. unaParcela1=soja y unaParcela2=mentita. Falso") {
@@ -118,9 +120,8 @@ class AgricultoraTest : DescribeSpec({
         it("La parcela elegida es (la que tiene menos plantas)"){
             unaAgricultora.parcelaElegida().shouldBe(unaParcela2)
         }
-
         it("Agricultora plantar estratégicamente") {
-            unaAgricultora.plantarEstrategicamente(unaDeMentita).shouldBe(unaParcela2)
+            unaParcela2.cantidadPlantada().shouldBe(2)
         }
     }
 
