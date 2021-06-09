@@ -1,9 +1,9 @@
 package ar.edu.unahur.obj2.semillasAlViento
 
+import io.kotest.assertions.show.show
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.booleans.shouldBeFalse
-import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.shouldBe
 
 class PlantaTest : DescribeSpec({
@@ -87,13 +87,15 @@ class ParcelaTest : DescribeSpec({
         it("Cantidad plantada en una parcela"){
             unaParcela.cantidadPlantada().shouldBe(4)
         }
-        //El metodo esta en Planta, no en parcela por eso no funciona. DESCOMENTAR CUANDO SE PASA EL METODO A PARCELA
         it("Saber si la parcela tiene complicaciones(any plant tolera menos sol que la parcela") {
            unaParcela.parcelaTieneComplicaciones().shouldBe(false)
         }
-        fun Any.shouldThrow() { "No hay lugar en la parcela o la planta no tolera el sol"}
-        it("parcela Puede plantar unaDeMentita"){
-            unaParcela.plantar(unaDeMentita).shouldThrow()
+        //fun Any.shouldThrow() { "No hay lugar en la parcela o la planta no tolera el sol"}
+        it("unaParcela no tiene lugar para plantar unaDeMentita: No tiene lugar. Si tiene cantidad de sol necesaria"){
+            unaParcela.quedaLugarEnParcela().shouldBeFalse()
+            unaParcela.plantaToleraElSolDeLaParcela(unaDeMentita).shouldBeTrue()
+            unaParcela.cantidadQuePuedoPlantar().shouldBe(0)
+            //unaParcela.plantar(unaDeMentita).show()
         }
     }
 })

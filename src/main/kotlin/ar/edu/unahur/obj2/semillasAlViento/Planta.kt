@@ -12,13 +12,14 @@ class Menta( anioObtencionSemilla: Int, altura: Float) : Planta(anioObtencionSem
 }
 
 open class Soja( anioObtencionSemilla: Int, altura: Float) : Planta(anioObtencionSemilla, altura) {
-  override fun daSemillas(): Boolean = esFuerte() || (this.anioObtencionSemilla > 2007 && this.altura > 1)
+  fun cumpleCondicionAlernativaParaSemilla(): Boolean = this.anioObtencionSemilla > 2007 && this.altura > 1
+  override fun daSemillas(): Boolean = esFuerte() || cumpleCondicionAlernativaParaSemilla()
   override fun horasDeSolQueTolera(): Int {
-    var horas: Int = 0
-    horas = if (altura < 0.5){ 6 }
-    else if (altura < 1.0){ 7 }
-    else 9
-    return horas
+    return when {
+          altura < 0.5 -> 6
+          altura in 0.5..1.0 -> 7
+          else -> 9
+    }
   }
 }
 
