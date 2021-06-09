@@ -1,7 +1,6 @@
 package ar.edu.unahur.obj2.semillasAlViento
 
 class Parcela(val ancho: Int, val largo: Int, val horasSolPorDia: Int) {
-
   val plantas = mutableListOf<Planta>()
   fun cantidadPlantada() = plantas.size
   fun superficie(): Int = ancho * largo
